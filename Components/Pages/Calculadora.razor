@@ -1,0 +1,59 @@
+@page "/calculadora"
+@rendermode InteractiveServer
+
+<PageTitle>Calculadora</PageTitle>
+
+<h1>Calculadora</h1>
+
+<p>Mira la Calculadora</p>
+
+<div>
+    <input type="number" @bind="numero1" placeholder="Primer número" />
+    <input type="number" @bind="numero2" placeholder="Segundo número" />
+</div>
+
+<div class="mt-3">
+    <button class="btn btn-primary" @onclick="suma ">Sumar</button>
+    <button class="btn btn-secondary" @onclick="resta">Restar</button>
+    <button class="btn btn-success" @onclick="multiplicar">Multiplicar</button>
+    <button class="btn btn-danger" @onclick="dividir">Dividir</button>
+</div>
+
+<button class="btn btn-primary" @onclick="Calcular">Calcular</button>
+
+<p>Resultado = @resultado</p>
+
+@code{
+    double numero1 = 0;
+    double numero2 = 0;
+    double resultado = 0;
+
+    string operacion = "";
+
+    void suma(){ operacion = "+";}
+    void resta(){ operacion = "-";}
+    void multiplicar(){ operacion = "*";}
+    void dividir(){ operacion = "/";}
+
+    void Calcular(){
+        switch (operacion){
+            case "+":
+                resultado = numero1 + numero2;
+                break;
+            case "-":
+                resultado = numero1 - numero2;
+                break;
+            case "*":
+                resultado = numero1 * numero2;
+                break;
+            case "/":
+                if (numero2 ==0){
+                    resultado = double.NaN;
+                }else{
+                    resultado = numero1 / numero2;
+            }
+            break;
+                
+        }
+    }
+}

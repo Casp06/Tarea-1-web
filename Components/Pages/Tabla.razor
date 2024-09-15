@@ -1,0 +1,23 @@
+@page "/tabla"
+@rendermode InteractiveServer
+
+<PageTitle>Tabla de multiplicar</PageTitle>
+
+<h1>Tablas de multiplicar</h1>
+
+<p>Ejemplo 1</p>
+
+<div>
+    <label for="">Numero</label>
+    <input type="number" @bind="numero" class="form-control">
+</div>
+
+@if(numero >0){
+    for(int i =0; i<=15; i++){
+        <p class="pb-0.5">@numero x @i = @(i*numero)</p>
+    }
+}
+
+@code{
+    int numero = 0;
+}

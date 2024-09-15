@@ -1,0 +1,58 @@
+@page "/aprende_mas"
+@rendermode InteractiveServer
+
+<PageTitle>Aprende Mas</PageTitle>
+
+<h1>Aprende Mas</h1>
+
+@if(mostrarVideo){
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item w-100 "   src="@urlVideo" allowfullscreen></iframe>
+    </div>
+    
+
+    <button class="btn btn-primary" @onclick="()=>mostrarVideo = false">Cerrar Video</button>
+}else{
+
+<div class="row">
+    @foreach (var video in videos){
+        <div class="col-md-4 mb-3">
+                <div class="card">
+  <img @onclick="()=>verVideo(video)" src="https://i.ytimg.com/vi/@video.Url/hqdefault.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Video</h5>
+    <p class="card-text">@video.Titulo</p>
+    <a href="https://www.youtube.com/watch?v=@video.Url" class="btn btn-primary">Ver video</a>
+  </div>
+</div>
+        </div>
+    }
+
+</div>
+}
+
+
+@code{
+
+    bool mostrarVideo = false;
+    string urlVideo = "";
+    
+    class Video{
+        public string Titulo {get; set; } = "";
+        public string Url {get; set; } = "";
+    }
+
+    void verVideo(Video video){
+        mostrarVideo = true;
+        urlVideo = $"https://www.youtube.com/embed/{video.Url}?7rel=0";
+    }
+
+    List<Video> videos  = new List<Video>{
+        new Video{Titulo = "Aprende Blazor - Crea tu primera aplicación Blazor (Explica bien)", Url = "kbvdnUTZ_xA"},
+        new Video{Titulo = "Crear CRUD en Blazor (Es muy bueno para qprender cosas nuevas)", Url = "NOJveObsX0Q"},
+        new Video{Titulo = "Blazor desde Cero (Es bueno para comenzar)", Url = "PFOknwtulcM"},
+        new Video{Titulo = "Novedades de Blazor (aqui me gusto mucho todo)", Url = "EBvDPGYe8rY"},
+        new Video{Titulo = "Aprende Blazor || C# en el browser (Es lo mejor)", Url = "1TjruD-0auI"}
+        };
+
+}
